@@ -1,0 +1,199 @@
+<div class="container">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <h1>Регистрация</h1>
+
+    <div class="form-control">
+      <label>Имя</label>
+      <input type="text" placeholder="Имя" formControlName="name">
+
+      <div
+        *ngIf="form.get('name')?.invalid && form.get('name')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('name')!.errors!['required']"
+        >
+          Необходимо ввести ваше имя
+        </small>
+
+        <small
+          *ngIf="form.get('name')!.errors!!['maxlength']"
+        >
+          Допустимая длинна имени {{form!.get('name')!.errors!['maxlength']!.requiredLength}} символов
+        </small>
+
+        <small
+          *ngIf="form.get('name')!.errors!!['pattern']"
+        >
+          Имя не должно содеражать цифры и спецсимволы (!“#$%‘()*)
+        </small>
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Фамилия</label>
+      <input type="text" placeholder="Фамилия" formControlName="lastname">
+
+      <div
+        *ngIf="form.get('lastname')?.invalid && form.get('lastname')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('lastname')!.errors!['required']"
+        >
+          Необходимо ввести вашу фамилию
+        </small>
+
+        <small
+          *ngIf="form.get('lastname')!.errors!!['maxlength']"
+        >
+          Допустимая длинна фамилии {{form!.get('lastname')!.errors!['maxlength']!.requiredLength}} символов
+        </small>
+
+        <small
+          *ngIf="form.get('lastname')!.errors!!['pattern']"
+        >
+          Фамилия не должна содеражать цифры и спецсимволы (!“#$%‘()*)
+        </small>
+
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Email</label>
+      <input type="text" placeholder="Email" formControlName="email">
+
+
+      <div
+        *ngIf="form.get('email')?.invalid && form.get('email')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('email')!.errors!['required']"
+        >
+          Поле email не может быть пустым
+        </small>
+
+        <small
+          *ngIf="form.get('email')!.errors!['email']"
+        >
+          Введите корректный email
+        </small>
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Пароль</label>
+      <input type="password" placeholder="Пароль" formControlName="password">
+
+
+      <div
+        *ngIf="form.get('password')!.invalid && form.get('password')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('password')!.errors!['required']"
+        >
+          Пароль не может быть пустым
+        </small>
+
+        <small
+          *ngIf="form.get('password')!.errors!['minlength']"
+        >
+          Длинна пароля должна быть не менее {{form!.get('password')!.errors!['minlength']!.requiredLength}}.
+          Сейчас количество символов: {{form!.get('password')!.errors!['minlength']!.actualLength}}
+        </small>
+
+
+        <small
+          *ngIf="form.get('password')!.errors!['invalidPasswordNumber']"
+        >
+          Пароль должен содержать хотя бы одну цифру
+        </small>
+
+        <small
+          *ngIf="form.get('password')!.errors!['invalidCapitalLetter']"
+        >
+          Пароль должен содержать хотя бы одну заглавную букву
+        </small>
+
+        <small
+          *ngIf="form.get('password')!.errors!['invalidLowercaseLetter']"
+        >
+          Пароль должен содержать хотя бы одну цифру строчную букву
+        </small>
+
+        <small
+          *ngIf="form.get('password')!.errors!['invalidSymbol']"
+        >
+          Пароль должен содержать хотя бы один спецсимвол (!“#$%‘()*)
+        </small>
+
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Подтвердите пароль</label>
+      <input type="password" placeholder="Пароль" formControlName="passwordCheck">
+
+
+      <div
+        *ngIf="form.get('passwordCheck')!.invalid && form.get('passwordCheck')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('passwordCheck')!.errors!['required']"
+        >
+          Пароль не может быть пустым
+        </small>
+        <small
+          *ngIf="form.get('passwordCheck')!.errors!['notSame'] && !form.get('passwordCheck')!.errors!['required']"
+        >
+          Пароли не совпадают
+        </small>
+
+
+      </div>
+    </div>
+
+
+    <div class="form-control">
+      <label>Дата рождения</label>
+      <input type="date" placeholder="Дата рождения" formControlName="dateOfBirth">
+
+
+      <div
+        *ngIf="form.get('dateOfBirth')!.invalid && form.get('dateOfBirth')!.touched"
+        class="validation"
+      >
+
+        <small
+          *ngIf="form.get('dateOfBirth')!.errors!['required']"
+        >
+          Необходимо ввести вашу дату рождения
+        </small>
+
+        <small
+          *ngIf="form.get('dateOfBirth')!.errors!['checkDate'] && !form.get('dateOfBirth')!.errors!['required']"
+        >
+          Вам должно быть больше 18 лет
+        </small>
+
+
+      </div>
+    </div>
+
+    <div class="btn-sub">
+      <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+    </div>
+
+    <p class="error" *ngIf="error;">{{error}}</p>
+  </form>
+</div>
+
+
+

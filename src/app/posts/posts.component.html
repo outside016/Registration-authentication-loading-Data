@@ -1,0 +1,99 @@
+<div class="container">
+
+  <form class="card" [formGroup]="formPost" (ngSubmit)="submit()">
+    <div class="form-control">
+      <label>Заголовок</label>
+      <input type="text" placeholder="Заголовок" formControlName="title">
+
+      <div
+        *ngIf="formPost.get('title')?.invalid && formPost.get('title')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="formPost.get('title')!.errors!['required']"
+        >
+          Необходимо ввести заголовок поста
+        </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label>Текст</label>
+      <input type="text" placeholder="Текст" formControlName="body">
+
+      <div
+        *ngIf="formPost.get('body')?.invalid && formPost.get('body')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="formPost.get('body')!.errors!['required']"
+        >
+          Необходимо ввести текст поста
+        </small>
+      </div>
+    </div>
+
+    <div class="btn-add">
+      <button class="btn" type="submit" [disabled]="formPost.invalid">Добавить</button>
+    </div>
+  </form>
+
+
+  <hr>
+
+  <p class="error" *ngIf="error;">{{error}}</p>
+
+  <div>
+    <div *ngIf="posts.length; else noPosts">
+      <div class="card" *ngFor="let post of posts | paginate:{
+      itemsPerPage: tableSize,
+      currentPage: page,
+      totalItems: count
+      }; let i = index">
+        <div class="post">
+          <div>
+            <div *ngIf="post.isEdit">
+              <input class="post__edit" [(ngModel)]="post.title">
+            </div>
+            <div *ngIf="!post.isEdit">
+              <p class="post__title">{{post.title | titlecase}}</p>
+            </div>
+          </div>
+          <div>
+            <div *ngIf="post.isEdit">
+              <textarea class="post__edit area" [(ngModel)]="post.body"></textarea>
+            </div>
+            <div *ngIf="!post.isEdit">
+              <p class="post__body">{{post.body | titlecase}}</p>
+            </div>
+          </div>
+          <div class="btn__post">
+            <div *ngIf="!post.isEdit">
+              <button class="btn" (click)="onEdit(post)">Редактировать</button>
+            </div>
+            <div *ngIf="post.isEdit">
+              <button class="btn btn-save" (click)="onUpdate(post)">Сохранить</button>
+            </div>
+            <div *ngIf="post.isEdit">
+              <button class="btn" (click)="onCancel(post)" >Отмена</button>
+            </div>
+            <div *ngIf="!post.isEdit">
+              <button class="btn btn-danger" (click)="remotePost(post.id)">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noPosts>
+      <p class="noPosts">Нет элементов</p>
+    </ng-template>
+  </div>
+  <div>
+    <pagination-controls
+      previousLabel="Предыдущая"
+      nextLabel="Следующая"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+

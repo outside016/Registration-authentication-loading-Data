@@ -1,0 +1,60 @@
+<div class="container">
+  <form class="card" [formGroup]="formAuth" (ngSubmit)="submit()">
+    <h1>Авторизация</h1>
+
+
+    <div class="form-control">
+      <label>Email</label>
+      <input type="text" placeholder="Email" formControlName="email">
+
+
+      <div
+        *ngIf="formAuth.get('email')?.invalid && formAuth.get('email')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="formAuth.get('email')!.errors!['required']"
+        >
+          Поле email не может быть пустым
+        </small>
+
+        <small
+          *ngIf="formAuth.get('email')!.errors!['email']"
+        >
+          Введите корректный email
+        </small>
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Пароль</label>
+      <input type="password" placeholder="Пароль" formControlName="password">
+
+
+      <div
+        *ngIf="formAuth.get('password')!.invalid && formAuth.get('password')!.touched"
+        class="validation"
+      >
+        <small
+          *ngIf="formAuth.get('password')!.errors!['required']"
+        >
+          Пароль не может быть пустым
+        </small>
+
+        <small
+          *ngIf="formAuth.get('password')!.errors!['minlength']"
+        >
+          Длинна пароля должна быть не менее {{formAuth!.get('password')!.errors!['minlength']!.requiredLength}}.
+          Сейчас количество символов: {{formAuth!.get('password')!.errors!['minlength']!.actualLength}}
+        </small>
+      </div>
+    </div>
+
+
+    <div class="btn-sub">
+      <button class="btn" type="submit" [disabled]="formAuth.invalid">Авторизоваться</button>
+    </div>
+  </form>
+</div>
+
