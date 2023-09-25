@@ -6,10 +6,10 @@
   padding: 0;
 }
 
-p{
+p {
   font-size: 1.5rem;
 
-  &.error{
+  &.error {
     color: red;
     text-align: center;
   }
@@ -44,8 +44,9 @@ ul {
 img {
   width: 100%;
 }
-.btn-add{
-text-align: center;
+
+.btn-add {
+  text-align: center;
 }
 
 .btn {
@@ -110,7 +111,7 @@ text-align: center;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
 
-  h1{
+  h1 {
     font-size: 2.5rem;
     text-align: center;
   }
@@ -126,7 +127,11 @@ text-align: center;
   }
 }
 
-small{
+.text-validation {
+  color: red;
+}
+
+small {
   font-size: 1rem;
 }
 
@@ -155,32 +160,35 @@ hr {
   margin: .5rem 0;
 }
 
-.post{
+.post {
   display: block;
-}
-.post__title{
-  margin-bottom: 1.5rem;
-  font-weight: bold;
+
+  &__title {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__body {
+    margin-bottom: 1.5rem;
+  }
+
+  &__edit {
+    font-size: 1.5rem;
+  }
 }
 
-.post__body{
-  margin-bottom: 1.5rem;
-}
-
-.post__edit{
-  font-size: 1.5rem;
-
-}
-.area{
+.area {
   font-family: 'Roboto', sans-serif;
   height: 10rem;
 }
-.btn__post{
+
+.btn__post {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.noPosts{
+
+.noPosts {
   text-align: center;
 }
 

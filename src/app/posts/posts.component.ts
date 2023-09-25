@@ -37,6 +37,7 @@ export class PostsComponent implements OnInit {
 
     ngOnInit() {
         this.fetchPosts()
+        this.everyMin()
     }
 
     fetchPosts() {
@@ -44,6 +45,12 @@ export class PostsComponent implements OnInit {
             .subscribe(posts => {
                 this.posts = posts
             })
+    }
+
+    everyMin() {
+            setInterval(() => {
+                this.fetchPosts()
+            }, 120000)
     }
 
     onTableDataChange(event: any) {
@@ -63,7 +70,7 @@ export class PostsComponent implements OnInit {
     onUpdate(post: any) {
         if (post.title && post.body) {
             this.httpService.putPost(post.title, post.body, post.id)
-                .subscribe(post => console.log(post), error => {
+                .subscribe(null, error => {
                     this.error = error.message
                 })
             post.isEdit = false
@@ -102,6 +109,5 @@ export class PostsComponent implements OnInit {
             )
 
     }
-
 
 }

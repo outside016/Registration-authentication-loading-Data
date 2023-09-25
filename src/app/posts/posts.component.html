@@ -61,6 +61,23 @@
           <div>
             <div *ngIf="post.isEdit">
               <textarea class="post__edit area" [(ngModel)]="post.body"></textarea>
+              <small class="text-validation"
+                     *ngIf="!post.title && post.body"
+              >
+                Необходимо ввести заголовок поста
+              </small>
+
+                <small class="text-validation"
+                        *ngIf="!post.body && post.title"
+                >
+                    Необходимо ввести текст поста
+                </small>
+
+              <small class="text-validation"
+                     *ngIf="!post.body && !post.title"
+              >
+                Пост не может быть пустым
+              </small>
             </div>
             <div *ngIf="!post.isEdit">
               <p class="post__body">{{post.body | titlecase}}</p>
@@ -71,13 +88,13 @@
               <button class="btn" (click)="onEdit(post)">Редактировать</button>
             </div>
             <div *ngIf="post.isEdit">
-              <button class="btn btn-save" (click)="onUpdate(post)">Сохранить</button>
+              <button class="btn btn-save" [disabled]="!post.body || !post.title" (click)="onUpdate(post)">Сохранить</button>
             </div>
             <div *ngIf="post.isEdit">
               <button class="btn" (click)="onCancel(post)" >Отмена</button>
             </div>
             <div *ngIf="!post.isEdit">
-              <button class="btn btn-danger" (click)="remotePost(post.id)">Удалить</button>
+              <button class="btn btn-danger" (click)="remotePost(post.id) ">Удалить</button>
             </div>
           </div>
         </div>
