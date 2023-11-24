@@ -12,9 +12,9 @@ export class PostsComponent implements OnInit {
     posts: Post[] = []
     oldPost: any
 
-    page: number = 1
-    count: number = 0
-    tableSize: number = 10
+    page: number = 1;
+    count: number = 0;
+    tableSize: number = 10;
 
 
     error: string = ''
