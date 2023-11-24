@@ -2,11 +2,9 @@
   <form class="card" [formGroup]="formAuth" (ngSubmit)="submit()">
     <h1>Авторизация</h1>
 
-
     <div class="form-control">
       <label>Email</label>
       <input type="text" placeholder="Email" formControlName="email">
-
 
       <div
         *ngIf="formAuth.get('email')?.invalid && formAuth.get('email')!.touched"
