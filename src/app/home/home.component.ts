@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {MyValidators} from "../validators/validators";
 import {HttpService} from "../http.service";
@@ -9,9 +9,16 @@ import {Router} from "@angular/router";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  error: string = ''
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpService,
+    private router: Router
+  ) {
+  }
+
+  error: string = '';
 
   form = this.fb.group({
     name: new FormControl(null, [
@@ -44,13 +51,6 @@ export class HomeComponent implements OnInit {
   })
 
 
-  constructor(
-    private fb: FormBuilder,
-    private httpService: HttpService,
-    private router: Router
-  ) {
-  }
-
   ngOnInit() {
     this.form.valueChanges.subscribe(() => {
       }
@@ -81,5 +81,8 @@ export class HomeComponent implements OnInit {
         this.error = error.message
       })
     }
+  }
+
+  ngOnDestroy() {
   }
 }
